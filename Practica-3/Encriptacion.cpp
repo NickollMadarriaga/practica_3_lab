@@ -9,26 +9,38 @@ unsigned char rotateLeft(unsigned char value, int shift) {
 unsigned char rotateRight(unsigned char value, int shift) {
     return (value >> shift) | (value << (8 - shift));
 }
+void printBits(unsigned char byte) {
+    for (int i = 7; i >= 0; i--) {
+        printf("%d", (byte >> i) & 1);
+    }
+    printf(" ");
+}
 
-// Encriptar: primero rota izquierda, luego XOR
+
 void encrypt(char* text, int n, char key) {
+    printf("Encriptado:\n");
     for (int i = 0; text[i] != '\0'; i++) {
         unsigned char byte = (unsigned char)text[i];
         byte = rotateLeft(byte, n);
-        byte = byte ^ key;
+        byte = byte ^ (unsigned char)key;
         text[i] = (char)byte;
+        printBits(byte);
     }
+    printf("\n");
 }
 
-// Desencriptar: primero XOR, luego rota derecha
 void decrypt(char* text, int n, char key) {
+    printf("Desencriptado:\n");
     for (int i = 0; text[i] != '\0'; i++) {
         unsigned char byte = (unsigned char)text[i];
-        byte = byte ^ key;
+        byte = byte ^ (unsigned char)key;
         byte = rotateRight(byte, n);
         text[i] = (char)byte;
+        printBits(byte);
     }
+    printf("\n");
 }
+
 
 int main_encriptacion() {
     try {
@@ -58,11 +70,6 @@ int main_encriptacion() {
         original[len] = '\0';
         encrypt(text, n, key);
         cout << "Texto encriptado: ";
-        for (int i = 0; text[i] != '\0'; i++) {
-            cout << (int)(unsigned char)text[i] << " ";
-        }
-        cout << endl;
-
 
         decrypt(text, n, key);
         cout << "Texto desencriptado: " << text << endl;

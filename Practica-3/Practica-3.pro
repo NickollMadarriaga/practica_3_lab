@@ -14,3 +14,5 @@ HEADERS += \
     Encriptacion.h \
     LZ78.h \
     RLE.h
+
+DISTFILES +=
