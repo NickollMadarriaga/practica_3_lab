@@ -51,29 +51,3 @@ string rleDecompress(const string& input) {
 }
 
 
-int main_RLE() {
-    try {
-        string input;
-        cout << "Ingrese una cadena de texto: ";
-        getline(cin, input);
-
-        if (input.empty()) throw invalid_argument("La cadena está vacía.");
-
-        string compressed = rleCompress(input);
-        cout << "Comprimido: " << compressed << endl;
-
-        string decompressed = rleDecompress(compressed);
-        cout << "Descomprimido: " << decompressed << endl;
-
-        if (input == decompressed) {
-            cout << "Verificación exitosa!" << endl;
-        } else {
-            cout << "Error: no coinciden." << endl;
-        }
-
-    } catch (const exception& e) {
-        cout << "Error: " << e.what() << endl;
-    }
-
-    return 0;
-}
